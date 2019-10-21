@@ -1,0 +1,15 @@
+CREATE TABLE `sys_schedule_job` (
+  `id` varchar(255) NOT NULL COMMENT '任务id',
+  `job_name` varchar(255) CHARACTER SET utf8 DEFAULT NULL COMMENT '任务名称',
+  `cron_expression` varchar(255) CHARACTER SET utf8 DEFAULT NULL COMMENT 'cron表达式',
+  `bean_name` varchar(255) CHARACTER SET utf8 DEFAULT NULL COMMENT '服务名称',
+  `method_name` varchar(255) CHARACTER SET utf8 DEFAULT NULL COMMENT '方法名称',
+  `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '状态 0 启动 1 停止',
+  `user_id` int(11) NOT NULL COMMENT '创建人id 关联sys_user',
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `del_flag` tinyint(4) NOT NULL DEFAULT '0' COMMENT '软删除标记 0 正常 1 删除',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='定时任务'
+
+INSERT INTO sys_schedule_job (id, job_name, cron_expression, bean_name, method_name, STATUS, user_id, create_time, update_time, del_flag) VALUES ('2', 'test job', '0/5 * * * * ?', 'Job4Log', 'test', 1, 1, NOW(), NOW(), 1)
